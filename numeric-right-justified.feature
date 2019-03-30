@@ -1,6 +1,6 @@
 Feature: Numeric RIGHT Justified
 
-  @TG-7 @TG-5 @OPEN
+  @TG-7 @OPEN
   Scenario: Random sequence within PAN to be RIGHT justified
     Given System has to generate a 9 digit sequence number randomly
     AND The length of the number is known
