@@ -1,6 +1,6 @@
 Feature: Numeric RIGHT Justified
 
-  @ORPHAN
+  @TG-7 @OPEN
   Scenario: Random sequence within PAN to be RIGHT justified
     Given System has to generate a number randomly
     AND The length of the number is known
