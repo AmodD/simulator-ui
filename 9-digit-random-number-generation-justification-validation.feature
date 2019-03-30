@@ -1,4 +1,4 @@
-Feature: Numeric RIGHT Justified
+Feature: 9 Digit Random Number generation Justification Validation
 
   @TG-7 @OPEN
   Scenario: Random sequence within PAN to be RIGHT justified
