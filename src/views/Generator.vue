@@ -8,7 +8,7 @@
 	        Transaction Generator
 	      </h1>
 	      <h2 class="subtitle">
-		      Fortiate
+		      Fortiate Data Solutions
 	      </h2>
 	    </div>
 	 </div>
