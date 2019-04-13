@@ -209,7 +209,7 @@ methods : {
 		const axios = require('axios');
 		let self = this ;
 
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/' + this.network + '/' + 'purchase')
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/' + this.mti  + '/' + this.network + '/' + 'purchase')
 		     .then(function (response) {
 			// handle success
 		      console.log(response.data.deHMJson);  
@@ -222,6 +222,7 @@ methods : {
 		  })
 		  .then(function () {
 		    // always executed
+		    console.log("calling isomessages");
 		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/isomessages')
 		.then(response => self.isomessages = response.data)
 		  });
