@@ -1,6 +1,6 @@
 Feature: RuPay Card Validation
 
-  @ORPHAN
+  @TG-23 @OPEN
   Scenario: To Validate the length of RuPay Card
     Given Select Network type
     When value is "rupay"
