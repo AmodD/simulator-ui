@@ -1,4 +1,4 @@
 Feature: card length validation
 
-  @ORPHAN
+  @TG-23 @OPEN
   Scenario: To validate the length of the card
