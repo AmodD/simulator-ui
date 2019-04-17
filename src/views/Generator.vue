@@ -143,27 +143,101 @@
 	     <div class="field is-horizontal">
 		  <div class="field-label is-normal">
 		    <label class="label">DE2</label>
+		    <span class="content is-small">{{de2.shortName}}</span>
 		  </div>
 		  <div class="field-body">
 		    <div class="field">
-		      <p class="control is-expanded has-icons-left">
-		        <input class="input" type="text" placeholder="PAN" v-model="de2" disabled>
-		        <span class="icon is-small is-left">
-		          <i class="fas fa-user"></i>
-		        </span>
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="PAN" v-model="de2.value" disabled>
 		      </p>
 		    </div>
 		  </div>
 		  <div class="field-label is-normal">
 		    <label class="label">DE3</label>
+		    <span class="content is-small">{{de3.shortName}}</span>
 		  </div>
 		  <div class="field-body">
 		    <div class="field">
-		      <p class="control is-expanded has-icons-left">
-		        <input class="input" type="text" placeholder="Processing Code" v-model="de3">
-		        <span class="icon is-small is-left">
-		          <i class="fas fa-user"></i>
-		        </span>
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Processing Code" v-model="de3.value" disabled>
+		        <span class="content is-small">{{de3.description}}</span>
+		      </p>
+		    </div>
+		  </div>
+	     </div> 
+	     <div class="field is-horizontal">
+		  <div class="field-label is-normal">
+		    <label class="label">DE4</label>
+		    <span class="content is-small">{{de4.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Transaction Amount" v-model="de4.value" disabled>
+		      </p>
+		    </div>
+		  </div>
+		  <div class="field-label is-normal">
+		    <label class="label">DE18</label>
+		    <span class="content is-small">{{de18.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Merchant Category Code" v-model="de18.value" disabled>
+		        <span class="content is-small">{{de18.description}}</span>
+		      </p>
+		    </div>
+		  </div>
+	     </div> 
+	     <div class="field is-horizontal">
+		  <div class="field-label is-normal">
+		    <label class="label">DE22</label>
+		    <span class="content is-small">{{de22.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Point Of Service Entry Mode" v-model="de22.value" disabled>
+		        <span class="content is-small">{{de22.description}}</span>
+		      </p>
+		    </div>
+		  </div>
+		  <div class="field-label is-normal">
+		    <label class="label">DE41</label>
+		    <span class="content is-small">{{de41.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Card Acceptor Terminal ID" v-model="de41.value" disabled>
+		        <span class="content is-small">{{de41.description}}</span>
+		      </p>
+		    </div>
+		  </div>
+	     </div> 
+	     <div class="field is-horizontal">
+		  <div class="field-label is-normal">
+		    <label class="label">DE42</label>
+		    <span class="content is-small">{{de42.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Merchant Identifier - Card Acceptor ID" v-model="de42.value" disabled>
+		        <span class="content is-small">{{de42.description}}</span>
+		      </p>
+		    </div>
+		  </div>
+		  <div class="field-label is-normal">
+		    <label class="label">DE43</label>
+		    <span class="content is-small">{{de43.shortName}}</span>
+		  </div>
+		  <div class="field-body">
+		    <div class="field">
+		      <p class="control is-expanded">
+		        <input class="input" type="text" placeholder="Card Acceptor Name and Location" v-model="de43.value" disabled>
+		        <span class="content is-small">{{de43.description}}</span>
 		      </p>
 		    </div>
 		  </div>
@@ -193,7 +267,13 @@ export default {
 		"txntype" : "",
 		"isomessages":"",
 		"de2" : "",
-		"de3" : ""
+		"de3" : "",
+		"de4" : "",
+		"de18" : "",
+		"de22" : "",
+		"de41" : "",
+		"de42" : "",
+		"de43" : ""
 	}
   },
   computed: {
@@ -212,9 +292,19 @@ methods : {
 		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/' + this.mti  + '/' + this.network + '/' + 'purchase')
 		     .then(function (response) {
 			// handle success
-		      console.log(response.data.deHMJson);  
-		    self.de2 = response.data.deHMJson.de2;
-		    self.de3 = response.data.deHMJson.de3;
+		      console.log(response.data.dataElements);  
+		      self.de2 = response.data.dataElements.filter(function(item) { return item.id === 2; })[0];
+		      self.de3 = response.data.dataElements.filter(function(item) { return item.id === 3; })[0];
+		      self.de4 = response.data.dataElements.filter(function(item) { return item.id === 4; })[0];
+		      self.de18 = response.data.dataElements.filter(function(item) { return item.id === 18; })[0];
+		      self.de22 = response.data.dataElements.filter(function(item) { return item.id === 22; })[0];
+		      self.de41 = response.data.dataElements.filter(function(item) { return item.id === 41; })[0];
+		      self.de42 = response.data.dataElements.filter(function(item) { return item.id === 42; })[0];
+		      self.de43 = response.data.dataElements.filter(function(item) { return item.id === 43; })[0];
+		    //self.de2 = de2.value;
+		    //self.de3 = de3.value;
+		    //self.de4 = de4.value;
+		    //self.de18 = response.data.deHMJson.de18;
 		  })
 		  .catch(function (error) {
 		    // handle error
