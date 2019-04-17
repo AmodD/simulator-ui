@@ -25,7 +25,7 @@
 			    <div class="field is-narrow">
 			      <div class="control">
 			        <div class="select is-fullwidth">
-			          <select v-model="network" required>
+			          <select v-model="network" v-on:change="networkNotSelected = false;" required>
 			            <option value="" selected disabled>Select a Network</option>
 			            <option value="rupay">Rupay</option>
 			            <option disabled value="visa">Visa</option>
@@ -41,6 +41,7 @@
 			        </div>
 			      </div>
 			    </div>
+			    <span class="help is-danger" v-if="networkNotSelected">Please Select A Network</span>
 			  </div>
 			 </div>
 			 <div class="field is-horizontal">
@@ -54,9 +55,9 @@
 			          <select v-model="mti" required>
 			            <option value="" selected disabled>Select MTI</option>
 			            <option value="0100">0100</option>
-			            <option value="0110">0110</option>
-			            <option value="0120">0120</option>
-			            <option value="0121">0121</option>
+			            <option disabled value="0110">0110</option>
+			            <option disabled value="0120">0120</option>
+			            <option disabled value="0121">0121</option>
 			          </select>
 			        </div>
 			      </div>
@@ -74,7 +75,7 @@
 			          <select v-model="txntype" required>
 			            <option value="" selected disabled>Any</option>
 			            <option value="purchase" v-if="network == 'rupay'">Purchase</option>
-			            <option value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
+			            <option disabled value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
 			          </select>
 			        </div>
 			      </div>
@@ -88,8 +89,8 @@
   <div class="field-body">
     <div class="field">
       <div class="control">
-        <button class="button is-warning is-rounded"  v-on:click="onSubmit()">
-          Generate message
+        <button class="button is-warning is-rounded"  v-on:click="generateData()">
+          Generate Data Elements
         </button>
       </div>
     </div>
@@ -127,11 +128,6 @@
     </div>
   </div>
   </div>
-
-<div class="notification">
-	{{ isoMessage }}
-	{{ isomessages }}
-</div>
 </div>
 
 </div>
@@ -246,6 +242,11 @@
     </div>	 
 
     <div class="section">
+    <div class="content">
+        <button class="button is-success is-rounded"  v-on:click="generateMessage()">
+          Generate ISO Message
+        </button>
+    </div>	
 <div class="notification">
 	{{ isoMessage }}
 	{{ isomessages }}
@@ -263,9 +264,11 @@ export default {
   data(){
 	return {
 		"network" : "",
+		"networkNotSelected" : false,
 		"mti" : "",
 		"txntype" : "",
 		"isomessages":"",
+		"dehm" : "",
 		"de2" : "",
 		"de3" : "",
 		"de4" : "",
@@ -284,12 +287,16 @@ return "ISO Message - ";
     }
   },
 methods : {
-	onSubmit(){
-
+	generateData(){
+		if(this.network == '') 
+		{
+			this.networkNotSelected = true;
+			return ;
+		}
 		const axios = require('axios');
 		let self = this ;
 
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/' + this.mti  + '/' + this.network + '/' + 'purchase')
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
 		     .then(function (response) {
 			// handle success
 		      console.log(response.data.dataElements);  
@@ -305,6 +312,7 @@ methods : {
 		    //self.de3 = de3.value;
 		    //self.de4 = de4.value;
 		    //self.de18 = response.data.deHMJson.de18;
+		    self.dehm = response.data.deHM;
 		  })
 		  .catch(function (error) {
 		    // handle error
@@ -313,13 +321,11 @@ methods : {
 		  .then(function () {
 		    // always executed
 		    console.log("calling isomessages");
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/isomessages')
-		.then(response => self.isomessages = response.data)
 		  });
 
 
 	},
-	networkSet(network){
+	generateMessage(){
 		//console.log("selected network - " + network);
 		//console.log("data generator url - " + process.env.VUE_APP_DATA_GENERATOR_URL);
 
@@ -327,16 +333,12 @@ methods : {
 
 		const axios = require('axios');
 
-		axios.all([
-			 axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/de2?network=' + this.network),
-			 axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/de3?network=' + this.network)
-			])
-		  .then(axios.spread(function (de2, de3) {
-		    // Both requests are now complete
-		    //console.log(de3.data.value);
-		    self.de2 = de2.data.value;
-		    self.de3 = de3.data.value;
-		  }));
+		axios.get(process.env.VUE_APP_PARSER_GENERATOR_URL + '/' + 'createmessage',{
+			    params: {
+			      data: self.dehm
+			    }
+		    })
+		.then(response => self.isomessages = response.data);
 
 		// Make a request for a user with a given ID
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL + '/de2', {
@@ -345,7 +347,7 @@ methods : {
 		//	    }
 		//    })
 		//.then(response => this.de2 = response.data.value)
-//  .then(function (response) {
+	//  .then(function (response) {
 // handle success
 //    console.log(response);  
 //  })
