@@ -82,20 +82,6 @@
 			    </div>
 			  </div>
 			  </div>
-			  <div class="field is-horizontal">
-  <div class="field-label">
-    <!-- Left empty for spacing -->
-  </div>
-  <div class="field-body">
-    <div class="field">
-      <div class="control">
-        <button class="button is-warning is-rounded"  v-on:click="generateData()">
-          Generate Data Elements
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 		</div>
 
 <div class="column">
@@ -128,6 +114,20 @@
     </div>
   </div>
   </div>
+<div class="field is-horizontal">
+  <div class="field-label">
+    <a href="http://generator.fortiate.com:8081" target="_blank">Link to API</a>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <button class="button is-warning is-rounded"  v-on:click="generateData()">
+          Generate Data Elements
+        </button>
+      </div>
+    </div>
+  </div>
+ </div>
 </div>
 
 </div>
