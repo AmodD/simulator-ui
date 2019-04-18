@@ -1,7 +1,8 @@
 module.exports = {
   productionSourceMap: false,
   devServer :{
-      public : 'http://localhost:7000',
+     // public : 'http://localhost:7000',
+      port: 7001, // CHANGE YOUR PORT HERE!
       host : '0.0.0.0',
       disableHostCheck : true
     }

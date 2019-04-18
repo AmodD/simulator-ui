@@ -16,8 +16,8 @@ RUN npm install
 COPY . .
 
 # build app for production with minification
-RUN npm run build -- --port 80
+RUN npm run build
 #RUN npm run build
 
 EXPOSE 80
-CMD [ "http-server", "dist" ]
+CMD [ "http-server -p 80", "dist" ]
