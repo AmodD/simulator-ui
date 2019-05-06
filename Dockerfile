@@ -20,4 +20,4 @@ RUN npm run build
 #RUN npm run build
 
 EXPOSE 80
-CMD [ "http-server -p 80", "dist" ]
+CMD [ "http-server","-p 80", "dist" ]

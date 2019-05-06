@@ -75,7 +75,7 @@
 			          <select v-model="txntype" required>
 			            <option value="" selected disabled>Any</option>
 			            <option value="purchase" v-if="network == 'rupay'">Purchase</option>
-			            <option disabled value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
+			            <option value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
 			          </select>
 			        </div>
 			      </div>
@@ -127,6 +127,16 @@
       </div>
     </div>
   </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <button class="button is-info is-rounded"  v-on:click="generateTree()">
+          Generate Situation Tree *
+        </button>
+	<div class="content is-small"> * For last 1000 transactions</div>
+      </div>
+    </div>
+  </div>
  </div>
 </div>
 
@@ -134,106 +144,26 @@
 
 </div>
 
-    <div class="section">
+<div class="section">
+<div id="wordtree_basic"></div>
+</div>	
+
+    <div v-if="dataElements" class="section">
       <div class="box">	   
-	     <div class="field is-horizontal">
+	     <div v-for="de in dataElements" class="field is-horizontal">
 		  <div class="field-label is-normal">
-		    <label class="label">DE2</label>
-		    <span class="content is-small">{{de2.shortName}}</span>
+			<span class="content is-small">{{de.shortName}}</span>
+		  </div>
+		  <div class="field-label is-normal">
+			  <label class="label">DE{{de.id}}</label>
 		  </div>
 		  <div class="field-body">
 		    <div class="field">
 		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="PAN" v-model="de2.value" disabled>
-		      </p>
-		    </div>
-		  </div>
-		  <div class="field-label is-normal">
-		    <label class="label">DE3</label>
-		    <span class="content is-small">{{de3.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Processing Code" v-model="de3.value" disabled>
-		        <span class="content is-small">{{de3.description}}</span>
-		      </p>
-		    </div>
-		  </div>
-	     </div> 
-	     <div class="field is-horizontal">
-		  <div class="field-label is-normal">
-		    <label class="label">DE4</label>
-		    <span class="content is-small">{{de4.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Transaction Amount" v-model="de4.value" disabled>
-		      </p>
-		    </div>
-		  </div>
-		  <div class="field-label is-normal">
-		    <label class="label">DE18</label>
-		    <span class="content is-small">{{de18.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Merchant Category Code" v-model="de18.value" disabled>
-		        <span class="content is-small">{{de18.description}}</span>
-		      </p>
-		    </div>
-		  </div>
-	     </div> 
-	     <div class="field is-horizontal">
-		  <div class="field-label is-normal">
-		    <label class="label">DE22</label>
-		    <span class="content is-small">{{de22.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Point Of Service Entry Mode" v-model="de22.value" disabled>
-		        <span class="content is-small">{{de22.description}}</span>
-		      </p>
-		    </div>
-		  </div>
-		  <div class="field-label is-normal">
-		    <label class="label">DE41</label>
-		    <span class="content is-small">{{de41.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Card Acceptor Terminal ID" v-model="de41.value" disabled>
-		        <span class="content is-small">{{de41.description}}</span>
-		      </p>
-		    </div>
-		  </div>
-	     </div> 
-	     <div class="field is-horizontal">
-		  <div class="field-label is-normal">
-		    <label class="label">DE42</label>
-		    <span class="content is-small">{{de42.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Merchant Identifier - Card Acceptor ID" v-model="de42.value" disabled>
-		        <span class="content is-small">{{de42.description}}</span>
-		      </p>
-		    </div>
-		  </div>
-		  <div class="field-label is-normal">
-		    <label class="label">DE43</label>
-		    <span class="content is-small">{{de43.shortName}}</span>
-		  </div>
-		  <div class="field-body">
-		    <div class="field">
-		      <p class="control is-expanded">
-		        <input class="input" type="text" placeholder="Card Acceptor Name and Location" v-model="de43.value" disabled>
-		        <span class="content is-small">{{de43.description}}</span>
+		        <input class="input" type="text" v-model="de.value" disabled>
+		        <span class="is-small">
+				<span class="content is-small">{{de.description}}</span>
+		        </span>
 		      </p>
 		    </div>
 		  </div>
@@ -241,14 +171,13 @@
       </div>	 
     </div>	 
 
-    <div class="section">
+    <div v-if="dataElements"  class="section">
     <div class="content">
         <button class="button is-success is-rounded"  v-on:click="generateMessage()">
           Generate ISO Message
         </button>
     </div>	
-<div class="notification">
-	{{ isoMessage }}
+<div class="notification content is-small">
 	{{ isomessages }}
 </div>
     </div>	    
@@ -268,15 +197,9 @@ export default {
 		"mti" : "",
 		"txntype" : "",
 		"isomessages":"",
+		"situations":"",
 		"dehm" : "",
-		"de2" : "",
-		"de3" : "",
-		"de4" : "",
-		"de18" : "",
-		"de22" : "",
-		"de41" : "",
-		"de42" : "",
-		"de43" : ""
+		"dataElements" : "",
 	}
   },
   computed: {
@@ -287,7 +210,7 @@ return "ISO Message - ";
     }
   },
 methods : {
-	generateData(){
+	generateTree(){
 		if(this.network == '') 
 		{
 			this.networkNotSelected = true;
@@ -296,23 +219,67 @@ methods : {
 		const axios = require('axios');
 		let self = this ;
 
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
+
+
+     google.charts.load('current', {packages:['wordtree']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/situations')
 		     .then(function (response) {
-			// handle success
+		     // handle success
+		      console.log(response.data);  
+			self.situations =  response.data;
+
+		  })
+		  .catch(function (error) {
+		    // handle error
+		    console.log(error);
+		  })
+		  .then(function () {
+		    // always executed
+		    console.log("calling isomessages");
+        var data = google.visualization.arrayToDataTable(self.situations);
+
+        var options = {
+          wordtree: {
+            format: 'implicit',
+            word: 'AuthorizationRequest'
+          }
+        };
+
+        var chart = new google.visualization.WordTree(document.getElementById('wordtree_basic'));
+        chart.draw(data, options);
+		  });
+
+
+
+      }
+
+
+
+
+
+		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
+
+	},generateData(){
+		if(this.network == '') 
+		{
+			this.networkNotSelected = true;
+			return ;
+		}
+		const axios = require('axios');
+		let self = this ;
+
+		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' + this.txntype)
+		     .then(function (response) {
+		     // handle success
+		      self.dataElements = response.data.dataElements;
 		      console.log(response.data.dataElements);  
-		      self.de2 = response.data.dataElements.filter(function(item) { return item.id === 2; })[0];
-		      self.de3 = response.data.dataElements.filter(function(item) { return item.id === 3; })[0];
-		      self.de4 = response.data.dataElements.filter(function(item) { return item.id === 4; })[0];
-		      self.de18 = response.data.dataElements.filter(function(item) { return item.id === 18; })[0];
-		      self.de22 = response.data.dataElements.filter(function(item) { return item.id === 22; })[0];
-		      self.de41 = response.data.dataElements.filter(function(item) { return item.id === 41; })[0];
-		      self.de42 = response.data.dataElements.filter(function(item) { return item.id === 42; })[0];
-		      self.de43 = response.data.dataElements.filter(function(item) { return item.id === 43; })[0];
-		    //self.de2 = de2.value;
-		    //self.de3 = de3.value;
-		    //self.de4 = de4.value;
-		    //self.de18 = response.data.deHMJson.de18;
-		    self.dehm = response.data.deHM;
+		      //self.de2 = response.data.dataElements.filter(function(item) { return item.id === 2; })[0];
+		      self.dehm = response.data.deHM;
 		  })
 		  .catch(function (error) {
 		    // handle error
