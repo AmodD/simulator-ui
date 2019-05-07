@@ -256,11 +256,6 @@ methods : {
 
 
       }
-
-
-
-
-
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
 
 	},generateData(){
