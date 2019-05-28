@@ -1,6 +1,5 @@
 <template>
   <div class="generator">
-    <h1></h1>
     <section class="hero is-primary">
   	<div class="hero-body">
 	    <div class="container">
@@ -73,7 +72,7 @@
 			      <div class="control">
 			        <div class="select is-fullwidth">
 			          <select v-model="txntype" required>
-			            <option value="" selected disabled>Any</option>
+			            <option value="any" selected disabled>Any</option>
 			            <option value="purchase" v-if="network == 'rupay'">Purchase</option>
 			            <option value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
 			          </select>
@@ -85,7 +84,7 @@
 		</div>
 
 <div class="column">
-<div class="field is-horizontal">
+<div v-if="false" class="field is-horizontal">
   <div class="field-label is-normal">
     <label class="label">IP</label>
   </div>
@@ -195,7 +194,7 @@ export default {
 		"network" : "",
 		"networkNotSelected" : false,
 		"mti" : "",
-		"txntype" : "",
+		"txntype" : "any",
 		"isomessages":"",
 		"situations":"",
 		"dehm" : "",
@@ -268,7 +267,7 @@ methods : {
 		let self = this ;
 
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' + this.txntype)
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype)
 		     .then(function (response) {
 		     // handle success
 		      self.dataElements = response.data.dataElements;
