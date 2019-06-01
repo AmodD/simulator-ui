@@ -49,10 +49,18 @@ new Vue({
   if (this.user) {
       return createElement(App)
   } else {
-      return createElement('a','NOT LOGGED IN')
+        console.log('In render else')
+//      return createElement('a','NOT LOGGED IN')
 //	 return      this.$router.push('http://demode48.fortiate.loc')
 //	return this.$router.go('http://demode48.fortiate.loc');
 //	 return createElement('window.location.href', 'http://demode48.fortiate.loc');
+	
+return createElement('a', {
+    attrs: {
+      href: process.env.VUE_APP_DEMO_DE48_URL
+    }
+  }, 'Please Sign In')
+
   }
 }
 }).$mount('#app')
