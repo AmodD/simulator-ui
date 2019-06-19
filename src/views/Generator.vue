@@ -13,7 +13,72 @@
 	 </div>
     </section>
 
-    <div class="section">
+	<section class="section">
+			 <div class="columns">
+			  <div class="column">
+			  
+			  <div class="field is-narrow">
+			      <div class="control">
+			        <div class="select is-fullwidth">
+			          <select v-model="network" v-on:change="networkNotSelected = false;" required>
+			            <option value="" selected disabled>Select a Network</option>
+			            <option value="rupay">Rupay</option>
+			            <option disabled value="visa">Visa</option>
+			            <option disabled value="mastercard">Mastercard</option>
+			            <option disabled value="iso8583-87">ISO8583-87</option>
+			            <option disabled value="iso8583-93">ISO8583-93</option>
+			            <option disabled value="iso8583-2003">ISO8583-2003</option>
+			            <option disabled>Amex</option>
+			            <option disabled>Diners</option>
+			            <option disabled>Cup</option>
+			            <option disabled>JCB</option>
+			          </select>
+			        </div>
+			      </div>
+			    </div>
+			
+			    <span class="help is-danger" v-if="networkNotSelected">Please Select A Network</span>
+
+			    </div>
+			    <div class="column">
+			
+			    <div class="field is-narrow">
+			      <div class="control">
+			        <div class="select is-fullwidth">
+			          <select v-model="mti" required>
+			            <option value="" selected disabled>Select MTI</option>
+			            <option value="0100">0100</option>
+			            <option disabled value="0110">0110</option>
+			            <option disabled value="0120">0120</option>
+			            <option disabled value="0121">0121</option>
+			          </select>
+			        </div>
+			    </div>
+			  </div>
+
+			  </div>
+			  <div class="column">
+
+			    <div class="field is-narrow">
+			      <div class="control">
+			        <div class="select is-fullwidth">
+			          <select v-model="txntype" required>
+			            <option value="any" selected disabled>Select Transaction Type</option>
+			            <option value="purchase" v-if="network == 'rupay'">Purchase</option>
+			            <option value="balance_enquiry" v-if="network == 'rupay'">Balance Enquiry</option>
+			          </select>
+			        </div>
+			    </div>
+			  </div>
+
+			  </div>
+			 </div>
+
+		<span class="label">STEP 1/3</span>
+        	<button class="button is-warning is-rounded"  v-on:click="generateData()">Generate Data Elements</button>
+        </section>	    
+
+    <div v-if="false" class="section">
 	    <div class="columns">
 		    <div class="column">
 			 <div class="field is-horizontal">
@@ -143,7 +208,7 @@
 
 </div>
 
-<div class="section">
+<div v-if="false" class="section">
 <div id="wordtree_basic"></div>
 </div>	
 
@@ -170,16 +235,22 @@
       </div>	 
     </div>	 
 
-    <div v-if="dataElements"  class="section">
+    <div class="section">
     <div class="content">
-        <button class="button is-success is-rounded"  v-on:click="generateMessage()">
-          Generate ISO Message
+	<span class="label">STEP 2/3</span>    
+        <button class="button is-danger is-rounded"  v-on:click="generateMessage()">
+          Create ISO Message
         </button>
     </div>	
-<div class="notification content is-small">
+    <div v-if="dataElements" class="notification content is-small">
 	{{ isomessages }}
-</div>
-    </div>	    
+    </div>
+    </div>
+
+    <section class="section">
+	<span class="label">STEP 3/3</span>
+        <button class="button is-link is-rounded"  v-on:click="generateData()">Send Transaction</button>
+    </section>	    
 
   </div>
 </template>
