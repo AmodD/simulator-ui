@@ -338,7 +338,7 @@ methods : {
 		let self = this ;
 
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype, {withCredentials: true})
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype)
 		     .then(function (response) {
 		     // handle success
 		      self.dataElements = response.data.dataElements;
@@ -368,8 +368,7 @@ methods : {
 		axios.get(process.env.VUE_APP_PARSER_GENERATOR_URL + '/' + 'createmessage',{
 			    params: {
 			      data: self.dehm
-			    },
-			    withCredentials: true
+			    }
 		    })
 		.then(response => self.isomessages = response.data);
 
