@@ -7,7 +7,7 @@
 	        Transaction Generator
 	      </h1>
 	      <h2 class="subtitle">
-		      Fortiate Data Solutions
+		ISO 8583
 	      </h2>
 	    </div>
 	 </div>
@@ -338,7 +338,7 @@ methods : {
 		let self = this ;
 
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype)
+		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype, {withCredentials: true})
 		     .then(function (response) {
 		     // handle success
 		      self.dataElements = response.data.dataElements;
@@ -368,7 +368,8 @@ methods : {
 		axios.get(process.env.VUE_APP_PARSER_GENERATOR_URL + '/' + 'createmessage',{
 			    params: {
 			      data: self.dehm
-			    }
+			    },
+			    withCredentials: true
 		    })
 		.then(response => self.isomessages = response.data);
 
