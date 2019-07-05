@@ -338,7 +338,7 @@ methods : {
 		let self = this ;
 
 		//axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/' + this.network + '/' + 'purchase')
-		axios.get(process.env.VUE_APP_DATA_GENERATOR_URL  + '/transaction/' +  this.txntype)
+		axios.get(process.env.VUE_APP_FORTIATE_RUPAY_GENERATOR_URL  + '/transaction/' +  this.txntype)
 		     .then(function (response) {
 		     // handle success
 		      self.dataElements = response.data.dataElements;

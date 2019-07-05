@@ -13,7 +13,7 @@ var isLoggedMixin = {
 	const axios = require('axios');
         
 	return new Promise((resolve, reject) => {
-          axios.get(process.env.VUE_APP_DEMO_DE48_URL  + '/sessionStatus', {withCredentials: true})
+          axios.get(process.env.VUE_APP_FORTIATE_DEMO_URL + '/sessionStatus', {withCredentials: true})
              .then(response => {
 		     console.log(response.data.user);
                 resolve(response.data.user);
