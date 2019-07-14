@@ -1,10 +1,53 @@
 <template>
   <div id="app">
-    <div id="nav" v-if=false>
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item sub-title" href="https://bulma.io">
+	    <!--      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
+	    <strong> SIMULATOR </strong>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">
+        Home
+      </a>
+      <a class="navbar-item" href="/transit">
+        Transit Demo
+      </a>
+      <a class="navbar-item" href="/generator">
+        Single Generator
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--
+    <div id="nav" v-if=true>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
+      <router-link to="/transit">Transit</router-link> | 
       <router-link to="/generator">Generator</router-link>
     </div>
+-->    
     <router-view/>
   </div>
 </template>

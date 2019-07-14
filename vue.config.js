@@ -1,4 +1,5 @@
 module.exports = {
+  // plugin omitted
   productionSourceMap: false,
   devServer :{
      // public : 'http://localhost:7000',

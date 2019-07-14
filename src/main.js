@@ -2,8 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import './../node_modules/bulma/css/bulma.css'
+//import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+//import { FontAwesome } from '@fortawesome/fontawesome-free'
+import './../node_modules/@fortawesome/fontawesome-free/css/all.css'
 
 Vue.config.productionTip = false
+
+//Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 var isLoggedMixin = {
   methods: {
@@ -46,7 +51,8 @@ new Vue({
     },
 //  render: h => h(App)
  render: function (createElement) {
-  if (this.user) {
+//  if (this.user) {
+  if (true) {
       return createElement(App)
   } else {
         console.log('In render else')

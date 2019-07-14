@@ -1,18 +1,5 @@
 <template>
   <div class="generator">
-    <section class="hero is-primary">
-  	<div class="hero-body">
-	    <div class="container">
-	      <h1 class="title">
-	        Transaction Generator
-	      </h1>
-	      <h2 class="subtitle">
-		ISO 8583
-	      </h2>
-	    </div>
-	 </div>
-    </section>
-
 	<section class="section">
 			 <div class="columns">
 			  <div class="column">
