@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <h3>Simulated Use Cases</h3>
     <ul>
-      <li><a href="" target="_blank" rel="noopener">Transit</a></li>
+      <li><a href="" target="_blank" rel="noopener">SACU</a></li>
       <li><a href="" target="_blank" rel="noopener">ATM</a></li>
     </ul>
     <h3>ISO8583 Networks</h3>

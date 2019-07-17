@@ -1,5 +1,6 @@
 <template>
-	<div>  
+	<div class="content">  
+	<h1>Station Accountancy And Control Unit</h1>	
 	    <ul>
 		    <li v-for="station in stations" :class="station.id"><a href="">{{station.name}}</a></li>    
 	    </ul>	    
@@ -446,7 +447,7 @@ li a{
 
 ul{
 	position:absolute;
- 	top: 12%;
+ 	top: 15%;
  	transform: translate(0%, -50%);;
 	display: flex;
 	flex-wrap: wrap;

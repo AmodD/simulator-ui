@@ -20,10 +20,10 @@
         Home
       </a>
       <a class="navbar-item" href="/transit">
-        Transit Demo
+        SACU
       </a>
       <a class="navbar-item" href="/generator">
-        Single Generator
+        ISO8583
       </a>
     </div>
 

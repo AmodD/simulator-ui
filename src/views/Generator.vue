@@ -10,6 +10,7 @@
 			          <select v-model="network" v-on:change="networkNotSelected = false;" required>
 			            <option value="" selected disabled>Select a Network</option>
 			            <option value="rupay">Rupay</option>
+			            <option value="myfinity">myFinity Switch</option>
 			            <option disabled value="visa">Visa</option>
 			            <option disabled value="mastercard">Mastercard</option>
 			            <option disabled value="iso8583-87">ISO8583-87</option>
@@ -34,10 +35,26 @@
 			        <div class="select is-fullwidth">
 			          <select v-model="mti" required>
 			            <option value="" selected disabled>Select MTI</option>
-			            <option value="0100">0100</option>
-			            <option disabled value="0110">0110</option>
-			            <option disabled value="0120">0120</option>
-			            <option disabled value="0121">0121</option>
+
+				    <option value="0200" v-if="network == 'myfinity'">Financial Transaction Request</option>
+			            <option value="0210" v-if="network == 'myfinity'">Financial Transaction Response</option>
+			            
+				    <option value="0220" v-if="network == 'myfinity'">Advice Transaction Request</option>
+			            <option value="0230" v-if="network == 'myfinity'">Advice Transaction Response</option>
+			            
+				    <option value="0320" v-if="network == 'myfinity'">Batch Upload Transaction Request</option>
+			            <option value="0330" v-if="network == 'myfinity'">Batch Upload Transaction Response</option>
+				    
+				    <option value="0500" v-if="network == 'myfinity'">Settlement Transaction Request</option>
+			            <option value="0510" v-if="network == 'myfinity'">Settlement Transaction Response</option>
+				    
+				    <option value="0800" v-if="network == 'myfinity'">Network Management & Administration Transaction Request</option>
+			            <option value="0810" v-if="network == 'myfinity'">Network Management & Administration Transaction Response</option>
+				    
+				    <option v-if="network == 'rupay'" value="0100">0100</option>
+			            <option disabled v-if="network == 'rupay'" value="0110">0110</option>
+			            <option disabled v-if="network == 'rupay'" value="0120">0120</option>
+			            <option disabled v-if="network == 'rupay'" value="0121">0121</option>
 			          </select>
 			        </div>
 			    </div>
