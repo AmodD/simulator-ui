@@ -339,9 +339,9 @@ export default {
 	mounted()
 	{
             console.log('Transit Component mounted.');
-//	    this.chps();
-//	    this.connect();
-//	    this.generate();
+	    this.chps();
+	    this.connect();
+	    this.generate();
 
 
 	}
