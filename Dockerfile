@@ -9,7 +9,8 @@ FROM node:lts-alpine
 #COPY package.json /app/package.json
 COPY . .
 RUN npm install
+RUN npm audit fix
 RUN npm install @vue/cli@3.7.0 -g
 
 # start app
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "build"]
