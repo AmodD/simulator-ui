@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './../node_modules/bulma/css/bulma.css'
+//import './../node_modules/bulma/css/bulma.css'
 //import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 //import { FontAwesome } from '@fortawesome/fontawesome-free'
-import './../node_modules/@fortawesome/fontawesome-free/css/all.css'
+//import './../node_modules/@fortawesome/fontawesome-free/css/all.css'
 
 Vue.config.productionTip = false
 
