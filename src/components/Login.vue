@@ -1,7 +1,7 @@
 <template>
- <div class="column is-half is-offset-one-quarter">
-
+<div class="field is-horizontal">
 	<form class="login" @submit.prevent="login">
+	<div class="field-body">	
 	<div class="field">
   		<div class="control has-icons-left">
     		<input  v-model="email" class="input" id="email" type="email" name="email" placeholder="Email" required autofocus>
@@ -16,21 +16,12 @@
 	</div>
 	<div class="field">
   		<p class=" has-text-centered">
-		<button class="button is-success">Login</button>
+		<button class="button is-dark">Login</button>
   		</p>
 	</div>
+	</div>
 	</form>
-
-<!--   <form class="login" @submit.prevent="login">
-     <h1>Sign in</h1>
-     <label>Email</label>
-     <input required v-model="email" type="email" placeholder="Name"/>
-     <label>Password</label>
-     <input required v-model="password" type="password" placeholder="Password"/>
-     <hr/>
-     <button type="submit">Login</button>
-</form> -->
- </div>
+</div>	
 </template>
 
 <script>

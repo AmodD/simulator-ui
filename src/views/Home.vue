@@ -1,7 +1,9 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Situation And Transaction Simulator"/>
-  </div>
+    <div class="container">
+      <p class="title">
+        Situation And Transaction Simulator 
+      </p>
+    </div>
 </template>
 
 <script>
