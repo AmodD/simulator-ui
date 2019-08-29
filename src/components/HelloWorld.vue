@@ -1,7 +1,6 @@
 <template>
-  <div class="hello">
+  <div class="hello content">
     <h1>{{ msg }}</h1>
-    <h3>Simulated Use Cases</h3>
     <ul>
       <li><a href="" target="_blank" rel="noopener">SACU</a></li>
       <li><a href="" target="_blank" rel="noopener">ATM</a></li>

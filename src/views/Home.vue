@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/fortiate_logo.png">
-    <HelloWorld msg="ISO 8583 Transaction Simulator"/>
+    <HelloWorld msg="Situation And Transaction Simulator"/>
   </div>
 </template>
 
