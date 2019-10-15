@@ -1,29 +1,30 @@
 <template>
   <div id="app">
-<section class="hero is-link is-fullheight-with-navbar">
+	<Menus v-if="isLoggedIn"/>	  
+<section class="hero  is-fullheight-with-navbar">
   <div class="hero-body">
       <router-view/>
   </div>	      
   <div class="hero-foot">
-<header class="navbar is-fixed-bottom has-shadow" style="background : black">
+<header class="navbar is-fixed-bottom has-shadow">
   <div class="container">
 
   <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <div class="navbar-item"><router-link to="/">
-	<span class="icon"><i class="fas fa-atom fa-spin"></i></span>&nbsp;&nbsp;SATS</router-link>
+    <div class="navbar-start has-text-centered">
+      <div class="navbar-item tooltip" data-tooltip="SATS"><router-link to="/">
+	<span class="icon has-text-grey"><i class="fas fa-atom "></i></span></router-link>
       </div>
-      <div class="navbar-item" v-if="isAuthorized"><router-link to="/">
-	<span class="icon has-text-success"><i class="fas fa-sitemap"></i></span>&nbsp;&nbsp;Situation</router-link>
+      <div class="navbar-item tooltip" data-tooltip="Situations" v-if="isAuthorized"><router-link to="/">
+	<span class="icon has-text-grey"><i class="fas fa-sitemap"></i></span></router-link>
       </div>
-      <div class="navbar-item" v-if="isAuthorized"><router-link to="/generator">
-	<span class="icon has-text-warning"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;Generator</router-link>
+      <div class="navbar-item tooltip" data-tooltip="Generator" v-if="isAuthorized"><router-link to="/generator">
+	<span class="icon has-text-grey"><i class="fas fa-cog"></i></span></router-link>
       </div>
-      <div class="navbar-item" v-if="isAuthorized"><router-link to="/transit">
-	<span class="icon has-text-danger"><i class="fas fa-cogs"></i></span>&nbsp;&nbsp;Simulator</router-link>
+      <div class="navbar-item tooltip" data-tooltip="Transit Demo" v-if="isAuthorized"><router-link to="/transit">
+	<span class="icon has-text-grey"><i class="fas fa-train"></i></span></router-link>
       </div>
-      <div class="navbar-item" v-if="isAuthorized"><router-link to="/">
-	<span class="icon has-text-info"><i class="fas fa-server"></i></span>&nbsp;&nbsp;Transactions</router-link>
+      <div class="navbar-item tooltip" data-tooltip="Transactions" v-if="isAuthorized"><router-link to="/">
+	<span class="icon has-text-grey"><i class="fas fa-server"></i></span></router-link>
       </div>
       <!-- <div class="navbar-item" v-if="isLoggedIn"><a @click="logout">Logout</a></div> -->
       <div class="navbar-item" v-else><Login /></div>
@@ -39,9 +40,11 @@
 
 <script>
 import Login from '@/components/Login.vue'
+import Menus from '@/components/Menus.vue'
 export default {
   components: {
-    Login
+	Menus,
+      	Login
   },
   computed: {
     isLoggedIn: function() {

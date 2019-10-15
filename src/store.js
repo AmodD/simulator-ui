@@ -111,7 +111,16 @@ export default new Vuex.Store({
         resolve()
       })
     },
-    logout({ commit }) {
+       access_sats({ commit }) {
+      return new Promise((resolve, reject) => {
+	      window.open('http://localhost:48100/sso?token=' + this.state.token , '_self','top=100,left=100,fullscreen=no,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no,directories=no,status=no');
+      })
+    },
+    access_home({ commit }) {
+      return new Promise((resolve, reject) => {
+	      window.open('http://localhost:48000/sso?token=' + this.state.token , '_self','top=100,left=100,fullscreen=no,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no,directories=no,status=no');
+      })
+    }, logout({ commit }) {
       return new Promise((resolve, reject) => {
         commit('logout')
         localStorage.removeItem('token')
